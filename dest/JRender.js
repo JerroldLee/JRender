@@ -445,5 +445,15 @@ var JRender = function() {
         }
 
     }
+
+var amd=(typeof define == 'function' && define.amd);
+
+	if (amd) {
+		define(function(){
+			return JRender;
+		});
+	} else if (typeof module === 'object' && module.exports) {
+		module.exports = JRender;
+	}
 gbl.JRender=JRender;
 })(window)

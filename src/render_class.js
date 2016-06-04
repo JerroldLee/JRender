@@ -2,7 +2,7 @@
 * @Author: jxj
 * @Date:   2016-06-04 22:42:06
 * @Last Modified by:   jxj
-* @Last Modified time: 2016-06-04 22:54:37
+* @Last Modified time: 2016-06-05 00:51:45
 */
 
 'use strict';
@@ -279,3 +279,13 @@
         }
 
     }
+
+var amd=(typeof define == 'function' && define.amd);
+
+	if (amd) {
+		define(function(){
+			return JRender;
+		});
+	} else if (typeof module === 'object' && module.exports) {
+		module.exports = JRender;
+	}
