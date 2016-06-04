@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+<div id="cont"></div>
+
+<!-- 如下的是html模板，一般情况最好把所有的模板放到一个文件夹中，然后按需加载，这里只是简单模拟一下 -->
+<!-- 使用REFtitle，可以通过setEvent里面引用title来引用相关dom -->
+<script src="jquery.min.js" ></script>
+
+<script src="JRender.js"></script>
+
+    <script type="text/plain" id="tmp">
+        <div >
+            <div ?REFtitle?>?title?</div>
+            <div>?content|length?个</div>
+            <div ?REFfoot?>?footer?</div>
+        </div>
+        <!-- pg是数组的子属性，自定义名字，content是data.content, -->
+        [[for pg in content]]
+        <div ?REFct?>
+            <span>?pg.name?</span>
+            <span>?pg.age?</span> 
+            <!-- pg.loves数据是是["sing","play"]这种，如果没有相关属性，不显示 -->
+            [[for lv in pg.loves]] 
+				?lv?
+             [[/for]]
+        </div>
+        [[/for]]
+    </script>
+
+
+
+
+    <script>
+
+
+//模拟ajax的数据回调
+    var data = {
+        title: "hello world",
+        content: [{name:"liu",age:28}, {name:"jiang",age:29,loves:["run","sing","play"]}, {name:"zhang",age:27}],
+        footer: "列表内容"
+    };
+
+
+    var rd = new JRender();
+
+//设置事件，这里的title和foot为前面模板中的?REFtitle?,?REFfoot?
+    rd.setEvent({
+        title: function(dms) {//这里的dms为引用前面
+            // alert(1)
+            dms.on("click", function() {
+                alert(1)
+            });
+        },
+        foot: function(dms, ct) {//第一个dms为引用?REFfoot?的dom，dms是形参可以用任何写法，第二个ct引用?REFct?，从第二个参数开始如果要用相关dom就要把形参直接写成那个名字
+
+            dms.on("click", function() {
+                ct.toggle();
+            })
+        }
+    })
+
+
+
+    rd.setFilter({
+        length: function(da, i, lg) {//设置过滤器，类似于?content|length?，第一个参数返回实际的数据，i表示index值（比如这个dom是在for循环里面的），lg表示for循环dom的总个数。。最后return的值表示最终显示的值
+            if (da.slice) {
+                return da.length;
+            } else {
+                return 0;
+            }
+        }
+    });
+
+
+
+    rd.render({
+        data: data,//数据
+        template: document.getElementById("tmp").innerHTML,//模板
+        aim: "#cont"//被插入的目标容器，能用选择器字符串或者jq对象
+    });
+    </script>
+</body>
+
+</html>
