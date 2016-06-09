@@ -2,7 +2,7 @@
 * @Author: jxj
 * @Date:   2016-06-04 22:42:06
 * @Last Modified by:   jxj
-* @Last Modified time: 2016-06-05 00:51:45
+* @Last Modified time: 2016-06-09 21:27:36
 */
 
 'use strict';
@@ -189,7 +189,7 @@
                         fun(dm);
                     }
                 }
-                dm.removeAttr("data-xjref");
+                
             }
         },
         render: function(opt, mid) { //根据情况 来进行分拆，包括，template html，data数据，prefix表示for循环中的别名
@@ -271,6 +271,7 @@
                 }
                 aim.html("").html(outstr);
                 ts.runEvent();
+                aim.find("[data-xjref]").removeAttr("data-xjref");
             }
 
             // console.log(outstr)
