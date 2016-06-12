@@ -9,7 +9,7 @@
 
 
 <h2>大概</h2>
-<p>会输出JRender全局变量，输出使用方法为 render({aim://目标载入模板的元素,data://模板接入的数据,template://模板字符串})，setFilter({filter1://过滤名称和值}),setEvent({dmname://载入事件的dom的名字})</p>
+<p>会输出JRender全局变量，输出使用方法为 render({aim://目标载入模板的元素,data://模板接入的数据,template://模板字符串,append:true//可选，为true表示追加内容到aim元素里面，默认为删除相关元素里面的内容})，setFilter({filter1://过滤名称和值}),setEvent({dmname://载入事件的dom的名字})</p>
 
 <h2>代码例子</h2>
 <p>
