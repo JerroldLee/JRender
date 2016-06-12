@@ -355,7 +355,7 @@ var JRender = function() {
                         fun(dm);
                     }
                 }
-                dm.removeAttr("data-xjref");
+                
             }
         },
         render: function(opt, mid) { //根据情况 来进行分拆，包括，template html，data数据，prefix表示for循环中的别名
@@ -367,7 +367,7 @@ var JRender = function() {
             }
 
             // console.log(opt)
-
+            var apd=opt.append;
             var ts = this;
             var ob = opt.data,
                 strhtml = opt.template,
@@ -435,8 +435,18 @@ var JRender = function() {
                 if (typeof aim === "string") {
                     aim = $(aim);
                 }
+               if(apd==true){
+                    var outdom=$(outstr);
+                    aim.append(outdom);
+                     ts.runEvent();
+                     outdom.removeAttr("data-xjref");
+                outdom.find("[data-xjref]").removeAttr("data-xjref");
+                }
+                else{
                 aim.html("").html(outstr);
                 ts.runEvent();
+                 aim.find("[data-xjref]").removeAttr("data-xjref");
+                }
             }
 
             // console.log(outstr)

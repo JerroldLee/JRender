@@ -2,7 +2,7 @@
 * @Author: jxj
 * @Date:   2016-06-04 22:42:06
 * @Last Modified by:   jxj
-* @Last Modified time: 2016-06-09 21:27:36
+* @Last Modified time: 2016-06-12 11:34:28
 */
 
 'use strict';
@@ -201,7 +201,7 @@
             }
 
             // console.log(opt)
-
+            var apd=opt.append;
             var ts = this;
             var ob = opt.data,
                 strhtml = opt.template,
@@ -269,9 +269,18 @@
                 if (typeof aim === "string") {
                     aim = $(aim);
                 }
+               if(apd==true){
+                    var outdom=$(outstr);
+                    aim.append(outdom);
+                     ts.runEvent();
+                     outdom.removeAttr("data-xjref");
+                outdom.find("[data-xjref]").removeAttr("data-xjref");
+                }
+                else{
                 aim.html("").html(outstr);
                 ts.runEvent();
-                aim.find("[data-xjref]").removeAttr("data-xjref");
+                 aim.find("[data-xjref]").removeAttr("data-xjref");
+                }
             }
 
             // console.log(outstr)
